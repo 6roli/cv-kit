@@ -881,7 +881,6 @@ input[type='color'] {
   align-items: center;
   gap: 0.75rem;
   margin-left: auto;
-  max-width: 24rem;
 }
 
 .toolbar__print .btn {
@@ -889,7 +888,8 @@ input[type='color'] {
 }
 
 .toolbar__hint {
-  margin: 0;
+  flex-basis: 100%;
+  margin: -0.2rem 0 0;
   color: var(--faint);
   font-size: 0.74rem;
   line-height: 1.35;
@@ -1045,7 +1045,6 @@ input[type='color'] {
 
   .toolbar__print {
     margin-left: 0;
-    max-width: none;
   }
 }
 
@@ -1088,11 +1087,6 @@ input[type='color'] {
 
   .stage {
     padding: 1rem 0.75rem 3rem;
-  }
-
-  .toolbar__print {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
@@ -1161,4 +1155,15 @@ input[type='color'] {
     transform: none;
     box-shadow: none;
   }
+}
+
+/* A fieldset legend does not take part in flex layout; floating it aligns it with the other toolbar labels. */
+.template-picker > legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+
+.template-picker > .segmented {
+  clear: both;
 }
