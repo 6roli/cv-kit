@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.wrangler/
+
+# Secrets and local environment
+.env
+.env.*
+.dev.vars
+
+# Personal CV data exported while testing: keep it out of Git unless you mean to commit it.
+*.resume.json
+resume.json
+
+.DS_Store
+Thumbs.db
+*.log
