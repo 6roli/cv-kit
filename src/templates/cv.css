@@ -1,0 +1,479 @@
+/*
+ * CV templates. Measurements use mm/pt so the screen preview matches the A4 print.
+ * The accent colour arrives as --cv-accent / --cv-accent-2 on .cv-sheet.
+ */
+
+.cv-sheet {
+  --cv-accent: #7c9cff;
+  --cv-accent-2: #a678ff;
+  --cv-paper: #ffffff;
+  --cv-ink: #1b2128;
+  --cv-muted: #56606d;
+  --cv-rule: #dfe2e8;
+  --cv-tag-bg: #f2f4f7;
+  /* Darker version of the accent for text on white (keeps light accents readable). */
+  --cv-accent-ink: color-mix(in oklab, var(--cv-accent) 62%, #0d1018);
+  --cv-accent-soft: color-mix(in srgb, var(--cv-accent) 9%, white);
+  --cv-serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --cv-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  box-sizing: border-box;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 14mm 15mm;
+  background: var(--cv-paper);
+  color: var(--cv-ink);
+  font-family: var(--cv-sans);
+  font-size: 9.5pt;
+  line-height: 1.45;
+  font-feature-settings: 'cv11', 'ss01';
+  text-rendering: optimizeLegibility;
+  overflow-wrap: anywhere;
+}
+
+.cv-sheet *,
+.cv-sheet *::before,
+.cv-sheet *::after {
+  box-sizing: border-box;
+}
+
+.cv p,
+.cv h1,
+.cv h2,
+.cv h3,
+.cv ul {
+  margin: 0;
+  padding: 0;
+}
+
+.cv ul {
+  list-style: none;
+}
+
+.cv a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.15em;
+}
+
+.cv-name {
+  font-size: 24pt;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cv-label {
+  margin-top: 1.5mm;
+  font-size: 11pt;
+  color: var(--cv-accent-ink);
+  font-weight: 500;
+}
+
+.cv-photo {
+  display: block;
+  width: 26mm;
+  height: 26mm;
+  object-fit: cover;
+  border-radius: 2mm;
+  flex: none;
+}
+
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1mm 4mm;
+  color: var(--cv-muted);
+  font-size: 8.5pt;
+}
+
+.cv-section {
+  margin-top: 5.5mm;
+}
+
+.cv-section__title {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cv-accent-ink);
+  margin-bottom: 2.5mm;
+  break-after: avoid;
+}
+
+.cv-summary + .cv-summary {
+  margin-top: 1.5mm;
+}
+
+.cv-entry {
+  break-inside: avoid;
+}
+
+.cv-entry + .cv-entry {
+  margin-top: 3.5mm;
+}
+
+.cv-entry__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4mm;
+}
+
+.cv-entry__title {
+  font-size: 10pt;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.cv-entry__title a {
+  text-decoration: none;
+}
+
+.cv-entry__subtitle {
+  color: var(--cv-muted);
+}
+
+.cv-entry__date {
+  flex: none;
+  color: var(--cv-muted);
+  font-size: 8.5pt;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cv-entry__body {
+  margin-top: 1mm;
+}
+
+.cv-entry__highlights {
+  margin-top: 1mm;
+}
+
+.cv .cv-entry__highlights li {
+  position: relative;
+  padding-left: 3.5mm;
+}
+
+.cv .cv-entry__highlights li + li {
+  margin-top: 0.6mm;
+}
+
+.cv .cv-entry__highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0.4mm;
+  top: 0.62em;
+  width: 1.3mm;
+  height: 1.3mm;
+  border-radius: 50%;
+  background: var(--cv-accent);
+}
+
+.cv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2mm;
+  margin-top: 1.5mm;
+}
+
+.cv-tags li {
+  padding: 0.2mm 2mm;
+  border-radius: 999px;
+  background: var(--cv-tag-bg);
+  font-size: 7.8pt;
+  line-height: 1.5;
+}
+
+.cv-skill + .cv-skill {
+  margin-top: 2.5mm;
+}
+
+.cv-skill {
+  break-inside: avoid;
+}
+
+.cv-skill__name,
+.cv-lang__name,
+.cv-interest__name {
+  font-weight: 600;
+}
+
+.cv-skill__level,
+.cv-lang__level,
+.cv-interest__keywords {
+  color: var(--cv-muted);
+  font-weight: 400;
+}
+
+.cv-langs li + li,
+.cv-interests li + li {
+  margin-top: 1mm;
+}
+
+/* ---------- Classic: single column, serif headings ---------- */
+
+.cv--classic .cv-header {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  padding-bottom: 4mm;
+  border-bottom: 0.6pt solid var(--cv-ink);
+}
+
+.cv--classic .cv-name,
+.cv--classic .cv-section__title,
+.cv--classic .cv-entry__title {
+  font-family: var(--cv-serif);
+}
+
+.cv--classic .cv-name {
+  font-size: 26pt;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cv--classic .cv-label {
+  font-family: var(--cv-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cv--classic .cv-contact {
+  margin-top: 2.5mm;
+}
+
+.cv--classic .cv-contact li + li::before {
+  content: '·';
+  margin-right: 4mm;
+  margin-left: -2.5mm;
+  color: var(--cv-rule);
+}
+
+.cv--classic .cv-section__title {
+  font-size: 12.5pt;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-variant: small-caps;
+  padding-bottom: 1mm;
+  border-bottom: 0.5pt solid var(--cv-rule);
+}
+
+.cv--classic .cv-entry__title {
+  font-size: 11pt;
+}
+
+.cv--classic .cv-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(55mm, 1fr));
+  gap: 2.5mm 6mm;
+}
+
+.cv--classic .cv-skill + .cv-skill {
+  margin-top: 0;
+}
+
+.cv--classic .cv-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1mm 6mm;
+}
+
+.cv--classic .cv-langs li + li {
+  margin-top: 0;
+}
+
+/* ---------- Modern: sidebar + main column ---------- */
+
+.cv--modern {
+  display: grid;
+  grid-template-columns: 58mm 1fr;
+  gap: 8mm;
+  align-items: start;
+}
+
+.cv--modern .cv-sidebar {
+  padding: 6mm 5mm;
+  border-radius: 3mm;
+  background: var(--cv-accent-soft);
+  font-size: 8.8pt;
+}
+
+.cv--modern .cv-sidebar .cv-section:first-of-type {
+  margin-top: 0;
+}
+
+.cv--modern .cv-photo {
+  width: 34mm;
+  height: 34mm;
+  border-radius: 50%;
+  margin: 0 auto 6mm;
+  border: 1mm solid #fff;
+}
+
+.cv--modern .cv-contact {
+  flex-direction: column;
+  gap: 1.2mm;
+  color: var(--cv-ink);
+  font-size: 8.5pt;
+}
+
+.cv--modern .cv-tags li {
+  background: #fff;
+}
+
+.cv--modern .cv-header {
+  padding-top: 2mm;
+  padding-bottom: 4mm;
+  border-bottom: 1.2mm solid var(--cv-accent);
+  border-image: linear-gradient(90deg, var(--cv-accent), var(--cv-accent-2)) 1;
+}
+
+.cv--modern .cv-name {
+  font-size: 25pt;
+}
+
+.cv--modern .cv-section__title {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+
+.cv--modern .cv-main .cv-section__title::after {
+  content: '';
+  flex: 1;
+  height: 0.5pt;
+  background: var(--cv-rule);
+}
+
+/* ---------- Dark: portfolio look on screen, light in print ---------- */
+
+.cv-sheet[data-template='dark'] {
+  --cv-paper: #050608;
+  --cv-ink: #f2f4f7;
+  --cv-muted: #98a1b0;
+  --cv-rule: rgb(255 255 255 / 0.12);
+  --cv-tag-bg: rgb(255 255 255 / 0.07);
+  --cv-accent-ink: color-mix(in srgb, var(--cv-accent) 60%, white);
+  background:
+    radial-gradient(120mm 70mm at 100% 0%, color-mix(in srgb, var(--cv-accent-2) 22%, transparent), transparent 70%),
+    radial-gradient(110mm 80mm at 0% 0%, color-mix(in srgb, var(--cv-accent) 18%, transparent), transparent 70%),
+    var(--cv-paper);
+}
+
+.cv--dark .cv-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2mm 6mm;
+  padding-bottom: 5mm;
+  margin-bottom: 1mm;
+  border-bottom: 0.6mm solid transparent;
+  border-image: linear-gradient(90deg, var(--cv-accent), var(--cv-accent-2), transparent) 1;
+}
+
+.cv--dark .cv-header__text {
+  grid-column: 2;
+}
+
+.cv--dark .cv-header:not(:has(.cv-photo)) .cv-header__text {
+  grid-column: 1 / -1;
+}
+
+.cv--dark .cv-photo {
+  grid-row: span 2;
+  width: 28mm;
+  height: 28mm;
+  border-radius: 50%;
+  padding: 0.7mm;
+  background: linear-gradient(135deg, var(--cv-accent), var(--cv-accent-2));
+}
+
+.cv--dark .cv-contact {
+  grid-column: 2;
+}
+
+.cv--dark .cv-header:not(:has(.cv-photo)) .cv-contact {
+  grid-column: 1 / -1;
+}
+
+.cv--dark .cv-name {
+  font-size: 28pt;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  background: linear-gradient(90deg, var(--cv-ink) 30%, color-mix(in srgb, var(--cv-ink) 45%, transparent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.cv--dark .cv-section__title {
+  background: linear-gradient(90deg, var(--cv-accent), var(--cv-accent-2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  width: fit-content;
+}
+
+.cv--dark .cv-columns {
+  display: grid;
+  grid-template-columns: 1fr 56mm;
+  gap: 9mm;
+  align-items: start;
+}
+
+.cv--dark .cv-side {
+  padding-left: 6mm;
+  border-left: 0.5pt solid var(--cv-rule);
+}
+
+.cv--dark .cv-tags li {
+  border: 0.5pt solid rgb(255 255 255 / 0.16);
+}
+
+@media print {
+  .cv-sheet {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .cv-sheet[data-template='dark'] {
+    --cv-paper: #ffffff;
+    --cv-ink: #1b2128;
+    --cv-muted: #56606d;
+    --cv-rule: #dfe2e8;
+    --cv-tag-bg: #f2f4f7;
+    --cv-accent-ink: color-mix(in oklab, var(--cv-accent) 62%, #0d1018);
+    background: #fff;
+  }
+
+  /* Gradient text needs backgrounds, which browsers skip by default when printing. */
+  .cv--dark .cv-name {
+    background: none;
+    color: var(--cv-ink);
+  }
+
+  .cv--dark .cv-section__title {
+    background: none;
+    color: var(--cv-accent-ink);
+  }
+
+  .cv--dark .cv-tags li {
+    border-color: var(--cv-rule);
+  }
+
+  /* Keep the thin accent details (bullets, rules, sidebar tint) in the PDF. */
+  .cv-sheet,
+  .cv-sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cv a {
+    text-decoration: none;
+  }
+}
