@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CV Kit — write your CV once, print it beautifully</title>
+    <meta
+      name="description"
+      content="Free, open CV builder that runs entirely in your browser. Write your CV once as JSON Resume data and get a polished web and PDF CV from several templates. No accounts; your data never leaves your computer."
+    />
+    <meta name="theme-color" content="#050608" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#editor">Skip to the editor</a>
+    <a class="skip-link" href="#preview">Skip to the preview</a>
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div>
+          <p class="brand__name">CV Kit</p>
+          <p class="brand__tagline">Write your CV once. Print it anywhere.</p>
+        </div>
+      </div>
+      <p class="privacy-chip">
+        <span class="privacy-chip__dot" aria-hidden="true"></span>
+        Your data stays in this browser
+      </p>
+      <a class="back-link" href="https://portfolio.gabriel-olius.workers.dev">← Portfolio</a>
+    </header>
+
+    <nav class="pane-switch" aria-label="Show">
+      <button type="button" class="pane-switch__btn" data-pane="editor" aria-pressed="true">Edit</button>
+      <button type="button" class="pane-switch__btn" data-pane="preview" aria-pressed="false">Preview</button>
+    </nav>
+
+    <main class="workspace" data-pane="editor">
+      <section class="editor-pane" id="editor" aria-labelledby="editor-heading" tabindex="-1">
+        <div class="pane-head">
+          <h1 id="editor-heading" class="pane-head__title">Your CV data</h1>
+          <p class="save-state" id="save-state" aria-live="polite"></p>
+        </div>
+
+        <div class="file-actions" role="group" aria-label="File">
+          <input type="file" id="import-input" accept="application/json,.json" class="visually-hidden" />
+          <label for="import-input" class="btn">Import JSON</label>
+          <button type="button" class="btn" id="export-btn">Export JSON</button>
+          <button type="button" class="btn btn--ghost" id="sample-btn">Load sample</button>
+          <button type="button" class="btn btn--ghost" id="empty-btn">Start from empty</button>
+        </div>
+        <p class="drop-hint">…or drop a <code>.json</code> file anywhere on the page.</p>
+
+        <div class="tabs" role="tablist" aria-label="Editor mode">
+          <button type="button" role="tab" id="tab-form" aria-controls="panel-form" aria-selected="true">Form</button>
+          <button type="button" role="tab" id="tab-json" aria-controls="panel-json" aria-selected="false" tabindex="-1">
+            JSON
+          </button>
+        </div>
+
+        <div id="panel-form" role="tabpanel" aria-labelledby="tab-form" class="tab-panel">
+          <div id="form-root" class="form-root"></div>
+        </div>
+
+        <div id="panel-json" role="tabpanel" aria-labelledby="tab-json" class="tab-panel" hidden>
+          <label for="json-text" class="json-label">
+            Resume as <a href="https://jsonresume.org/schema" rel="noopener">JSON Resume</a> (v1.0.0). Extra fields are
+            kept.
+          </label>
+          <textarea id="json-text" class="json-text" spellcheck="false" autocomplete="off" rows="24"></textarea>
+          <div class="json-actions">
+            <button type="button" class="btn btn--primary" id="json-apply">Apply changes</button>
+            <button type="button" class="btn btn--ghost" id="json-revert">Discard edits</button>
+          </div>
+          <div id="json-issues" class="issues" aria-live="polite"></div>
+        </div>
+
+        <aside class="privacy" aria-labelledby="privacy-heading">
+          <h2 id="privacy-heading" class="privacy__title">Your data stays in this browser</h2>
+          <p>
+            CV Kit has no server and no accounts and makes no requests to other sites. What you type is autosaved
+            only in this browser's local storage on this device. Export the JSON file to keep a copy or to move it to
+            another computer.
+          </p>
+          <button type="button" class="btn btn--danger btn--small" id="clear-btn">Clear data from this browser</button>
+        </aside>
+      </section>
+
+      <section class="preview-pane" id="preview" aria-labelledby="preview-heading" tabindex="-1">
+        <div class="pane-head">
+          <h2 id="preview-heading" class="pane-head__title">Preview</h2>
+        </div>
+        <div class="toolbar">
+          <fieldset class="toolbar__group template-picker">
+            <legend>Template</legend>
+            <div class="segmented" id="template-options"></div>
+          </fieldset>
+          <div class="toolbar__group">
+            <label for="accent-input">Accent</label>
+            <input type="color" id="accent-input" value="#7c9cff" />
+          </div>
+          <div class="toolbar__group">
+            <label for="lang-select">CV language</label>
+            <select id="lang-select">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+          <div class="toolbar__group toolbar__check">
+            <input type="checkbox" id="web-toggle" />
+            <label for="web-toggle">Web version</label>
+          </div>
+          <div class="toolbar__print">
+            <button type="button" class="btn btn--primary" id="print-btn" aria-describedby="print-hint">
+              Download PDF
+            </button>
+            <p class="toolbar__hint" id="print-hint">
+              Opens the print dialog: choose <strong>Save as PDF</strong>, paper A4, and turn off headers and footers.
+            </p>
+          </div>
+        </div>
+        <div class="stage" id="stage">
+          <div class="sheet-frame" id="sheet-frame">
+            <div class="cv-sheet" id="cv-sheet" data-template="modern"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span id="toast-text"></span>
+      <button type="button" class="btn btn--small" id="toast-undo" hidden>Undo</button>
+    </div>
+
+    <div class="drop-overlay" id="drop-overlay" hidden>
+      <p>Drop your JSON file to import it</p>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

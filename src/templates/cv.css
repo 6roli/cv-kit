@@ -211,6 +211,13 @@
   margin-top: 1mm;
 }
 
+/* Narrow columns: put dates under the title instead of beside it. */
+.cv-sidebar .cv-entry__head,
+.cv-side .cv-entry__head {
+  flex-direction: column;
+  gap: 0;
+}
+
 /* ---------- Classic: single column, serif headings ---------- */
 
 .cv--classic .cv-header {
@@ -243,11 +250,8 @@
   margin-top: 2.5mm;
 }
 
-.cv--classic .cv-contact li + li::before {
-  content: '·';
-  margin-right: 4mm;
-  margin-left: -2.5mm;
-  color: var(--cv-rule);
+.cv--classic .cv-contact {
+  gap: 1mm 5mm;
 }
 
 .cv--classic .cv-section__title {
