@@ -5,6 +5,9 @@
   // Must match the Worker name in the Cloudflare dashboard.
   "name": "cv-kit",
   "compatibility_date": "2026-10-20",
+  // Wrangler runs this before every deploy, so dist/ exists even if the Cloudflare
+  // dashboard's "Build command" is left empty (it was, and the deploy failed).
+  "build": { "command": "npm run build" },
   "assets": {
     "directory": "./dist",
     // Unknown addresses show our own 404 page.
